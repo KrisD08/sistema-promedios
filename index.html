@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistema Serverless de Promedios</title>
+</head>
+<body>
+  <h1>📘 Cálculo de Promedios (Serverless)</h1>
+
+  <label>Nota 1: <input id="n1" type="number" /></label><br/>
+  <label>Nota 2: <input id="n2" type="number" /></label><br/>
+  <label>Nota 3: <input id="n3" type="number" /></label><br/><br/>
+
+  <button id="btn">Calcular Promedio</button>
+  <pre id="resultado"></pre>
+
+  <script>
+    document.getElementById("btn").addEventListener("click", async () => {
+      const n1 = document.getElementById("n1").value;
+      const n2 = document.getElementById("n2").value;
+      const n3 = document.getElementById("n3").value;
+
+      const res = await fetch(`/api/calcular?nota1=${n1}&nota2=${n2}&nota3=${n3}`);
+      const data = await res.json();
+      document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>
